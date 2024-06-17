@@ -25,9 +25,9 @@ public class UserEntity extends BaseEntity {
     @OneToMany
     @JoinTable(name = "users_words", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private Set<Word> addedWords;
+    private Set<WordEntity> addedWordEntities;
 
     public UserEntity() {
-        this.addedWords = new HashSet<>();
+        this.addedWordEntities = new HashSet<>();
     }
 }

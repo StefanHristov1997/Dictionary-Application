@@ -1,9 +1,11 @@
 spring:
   jpa:
+    defer-datasource-initialization: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: 'TRUE'
+        defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
     open-in-view: 'false'
@@ -11,6 +13,10 @@ spring:
     hiddenmethod:
       filter:
         enabled: 'true'
+  sql:
+    init:
+      mode: always
+      continue-on-error: on
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: ${DEFAULT_ADMIN_PASS}

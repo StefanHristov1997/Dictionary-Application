@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "words")
-public class Word extends BaseEntity {
+public class WordEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String term;
@@ -23,8 +23,8 @@ public class Word extends BaseEntity {
     @Column(nullable = false)
     private LocalDate inputDate;
 
-    @ManyToOne (targetEntity = Language.class, optional = false)
-    private Language language;
+    @ManyToOne (targetEntity = LanguageEntity.class, optional = false)
+    private LanguageEntity languageEntity;
 
     @ManyToOne(targetEntity = UserEntity.class, optional = false)
     @JoinColumn(name = "user_id")

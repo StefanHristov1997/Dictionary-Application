@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "languages")
-public class Language extends BaseEntity {
+public class LanguageEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
@@ -24,9 +24,9 @@ public class Language extends BaseEntity {
     @OneToMany
     @JoinTable(name = "languages_words", joinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private Set<Word> words;
+    private Set<WordEntity> wordEntities;
 
-    public Language() {
-        this.words = new HashSet<>();
+    public LanguageEntity() {
+        this.wordEntities = new HashSet<>();
     }
 }
