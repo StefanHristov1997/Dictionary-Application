@@ -12,7 +12,7 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-nav rounded ">
-        <a th:if="${@currentUserSession.isLogged()}" class="nav-link my-text-color active h5 " href="/">Dictionary
+        <a th:if="${@currentUserSession.isLogged()}" class="nav-link my-text-color active h5 " th:href="@{/home}">Dictionary
             App</a>
         <a th:if="${@currentUserSession.isLogged()}" class="nav-link my-text-color active h5  " href="/">Add Word</a>
 
@@ -28,10 +28,15 @@
                        th:href="@{/users/register}">Register</a>
                 </li>
                 <a th:if="${@currentUserSession.isLogged()}" class="nav-link h5 my-text-color">Welcome,
-                    <span ></span></a>
-                <li class="nav-item col-md-4">
-                    <a th:if="${@currentUserSession.isLogged()}" class="nav-link my-text-color active h5 " href="/">Logout</a>
-                </li>
+                    <span th:text="${@currentUserSession.getUsername()}"></span></a>
+                <form th:action="@{/users/logout}" th:method="POST" class="nav-item col-md-4">
+                    <button th:if="${@currentUserSession.isLogged()}"
+                            class="nav-link my-text-color active h50"
+                            type="submit"
+                            th:href="@{/users/logout}">
+                        Logout
+                    </button>
+                </form>
             </ul>
         </div>
     </nav>

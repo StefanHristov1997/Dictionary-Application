@@ -24,4 +24,9 @@ public class CurrentUserSession {
         this.isLogged = true;
     }
 
+    public void logOutUser() {
+        this.username = null;
+        this.isLogged = false;
+    }
+
 }

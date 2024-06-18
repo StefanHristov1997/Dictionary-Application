@@ -10,4 +10,5 @@ public interface UserService {
     void registerUser(UserRegisterDTO userRegisterDTO);
 
     boolean loginUser(LoginUserDTO loginUserDTO);
+    void logoutUser();
 }
