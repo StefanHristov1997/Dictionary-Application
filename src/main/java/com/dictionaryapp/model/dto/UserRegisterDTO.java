@@ -1,5 +1,6 @@
 package com.dictionaryapp.model.dto;
 
+import com.dictionaryapp.validation.annotation.PasswordMatcher;
 import com.dictionaryapp.validation.annotation.UniqueEmail;
 import com.dictionaryapp.validation.annotation.UniqueUsername;
 import jakarta.validation.constraints.Email;
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@PasswordMatcher
 public record UserRegisterDTO(
 
         @NotBlank
