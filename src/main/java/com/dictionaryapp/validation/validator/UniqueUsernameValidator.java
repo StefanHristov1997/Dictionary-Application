@@ -28,7 +28,7 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
         if (username == null) {
             return true;
         } else {
-            final boolean isUsernameExist = userRepository.findByUsername(username).isPresent();
+             boolean isUsernameExist = userRepository.findByUsername(username).isEmpty();
 
             if (isUsernameExist) {
                 replaceDefaultConstraintViolation(context, message);

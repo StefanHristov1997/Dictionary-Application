@@ -12,23 +12,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @PasswordMatcher
-public record UserRegisterDTO(
+public class UserRegisterDTO {
 
-        @NotBlank
-        @Size(min = 3, max = 20, message = "{user.username.length}")
-        @UniqueUsername
-        String username,
+    @NotBlank(message = "{not.blank}")
+    @Size(min = 3, max = 20, message = "{user.username.length}")
+    @UniqueUsername
+    String username;
 
-        @NotBlank
-        @Email(message = "{user.email}")
-        @UniqueEmail
-        String email,
+    @NotBlank(message = "{empty.user.email}")
+    @Email(message = "{user.email}")
+    @UniqueEmail
+    String email;
 
-        @NotBlank
-        @Size(min = 3, max = 20, message = "{user.password.length}")
-        String password,
+    @NotBlank(message = "{not.blank}")
+    @Size(min = 3, max = 20, message = "{user.password.length}")
+    String password;
 
-        @NotBlank
-        @Size(min = 3, max = 20, message = "{user.confirm-password.length}")
-        String confirmPassword) {
+    @NotBlank(message = "{not.blank}")
+    @Size(min = 3, max = 20, message = "{user.confirm-password.length}")
+    String confirmPassword;
 }

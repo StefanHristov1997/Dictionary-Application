@@ -29,7 +29,7 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
         if (email == null) {
             return true;
         } else {
-            final boolean isEmailExist = userRepository.findByEmail(email).isPresent();
+             boolean isEmailExist = userRepository.findByEmail(email).isEmpty();
 
             if (isEmailExist) {
                 replaceDefaultConstraintViolation(context, message);

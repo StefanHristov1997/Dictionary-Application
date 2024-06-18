@@ -21,7 +21,7 @@ public class PasswordMatcherValidator implements ConstraintValidator<PasswordMat
         if (userRegisterDTO == null) {
             return true;
         } else {
-            boolean isPasswordMatch = userRegisterDTO.password() != null && userRegisterDTO.password().equals(userRegisterDTO.confirmPassword());
+            boolean isPasswordMatch = userRegisterDTO.getPassword() != null && userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword());
 
             if (!isPasswordMatch) {
                 HibernateConstraintValidatorContext hibernateContext =
