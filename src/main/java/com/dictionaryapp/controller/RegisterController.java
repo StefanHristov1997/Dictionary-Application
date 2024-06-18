@@ -50,9 +50,10 @@ public class RegisterController {
             rAtt.addFlashAttribute(attribute, userRegisterDTO);
             rAtt.addFlashAttribute(bindingResultPackage + "." + attribute, bindingResult);
             return "redirect:register";
-        } else {
-            userService.registerUser(userRegisterDTO);
-            return "redirect:login";
         }
+
+        userService.registerUser(userRegisterDTO);
+        return "redirect:login";
+
     }
 }

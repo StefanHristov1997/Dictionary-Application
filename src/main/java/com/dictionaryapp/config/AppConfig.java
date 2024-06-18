@@ -1,5 +1,6 @@
 package com.dictionaryapp.config;
 
+import com.dictionaryapp.model.dto.LoginUserDTO;
 import com.dictionaryapp.model.dto.UserRegisterDTO;
 import com.dictionaryapp.model.entity.UserEntity;
 import org.modelmapper.Converter;
@@ -19,6 +20,7 @@ public class AppConfig {
         ModelMapper modelMapper = new ModelMapper();
 
         Provider<UserEntity> newUserProvider = req -> new UserEntity();
+        Provider<LoginUserDTO> currentUserProvider = req -> new LoginUserDTO();
 
         Converter<String, String> passwordConverter
                 = ctx -> (ctx.getSource() == null)
@@ -31,6 +33,7 @@ public class AppConfig {
                 .addMappings(mapper -> mapper
                         .using(passwordConverter)
                         .map(UserRegisterDTO::getPassword, UserEntity::setPassword));
+
         return modelMapper;
     }
 
