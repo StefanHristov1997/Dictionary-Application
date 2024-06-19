@@ -16,15 +16,20 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String viewIndex() {
+
+        if(currentUserSession.isLogged()){
+            return "redirect:/home";
+        }
+
         return "index";
     }
 
     @GetMapping("/home")
-    public String home() {
+    public String viewHome() {
 
         if(!currentUserSession.isLogged()){
-            return "redirect:/users/login";
+            return "redirect:/";
         }
 
         return "home";

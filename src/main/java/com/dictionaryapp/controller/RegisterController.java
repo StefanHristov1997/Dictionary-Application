@@ -2,6 +2,7 @@ package com.dictionaryapp.controller;
 
 import com.dictionaryapp.model.dto.UserRegisterDTO;
 import com.dictionaryapp.service.UserService;
+import com.dictionaryapp.util.CurrentUserSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class RegisterController {
 
     private final UserService userService;
+    private final CurrentUserSession currentUserSession;
 
     @Value("${binding-result-package}")
     private String bindingResultPackage;
@@ -26,12 +28,17 @@ public class RegisterController {
 
 
     @Autowired
-    public RegisterController(UserService userService) {
+    public RegisterController(UserService userService, CurrentUserSession currentUserSession) {
         this.userService = userService;
+        this.currentUserSession = currentUserSession;
     }
 
     @GetMapping("/register")
-    public String register(Model model) {
+    public String viewRegister(Model model) {
+
+        if(currentUserSession.isLogged()){
+            return "redirect:/home";
+        }
 
         if (!model.containsAttribute(attribute)) {
             model.addAttribute(attribute, new UserRegisterDTO());
@@ -46,14 +53,18 @@ public class RegisterController {
             BindingResult bindingResult,
             RedirectAttributes rAtt) {
 
+        if(currentUserSession.isLogged()){
+            return "redirect:/home";
+        }
+
         if (bindingResult.hasErrors()) {
             rAtt.addFlashAttribute(attribute, userRegisterDTO);
             rAtt.addFlashAttribute(bindingResultPackage + "." + attribute, bindingResult);
-            return "redirect:register";
+            return "redirect:/users/register";
         }
 
         userService.registerUser(userRegisterDTO);
-        return "redirect:login";
 
+        return "redirect:/users/login";
     }
 }

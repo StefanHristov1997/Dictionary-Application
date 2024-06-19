@@ -24,7 +24,7 @@ public class WordEntity extends BaseEntity {
     private LocalDate inputDate;
 
     @ManyToOne (targetEntity = LanguageEntity.class, optional = false)
-    private LanguageEntity languageEntity;
+    private LanguageEntity language;
 
     @ManyToOne(targetEntity = UserEntity.class, optional = false)
     @JoinColumn(name = "user_id")

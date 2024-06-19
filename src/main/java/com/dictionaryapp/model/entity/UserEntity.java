@@ -22,12 +22,10 @@ public class UserEntity extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @OneToMany
-    @JoinTable(name = "users_words", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private Set<WordEntity> addedWordEntities;
+    @OneToMany(mappedBy = "addedBy")
+    private Set<WordEntity> addedWords;
 
     public UserEntity() {
-        this.addedWordEntities = new HashSet<>();
+        this.addedWords = new HashSet<>();
     }
 }

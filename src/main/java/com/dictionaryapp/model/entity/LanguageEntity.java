@@ -21,12 +21,10 @@ public class LanguageEntity extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany
-    @JoinTable(name = "languages_words", joinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private Set<WordEntity> wordEntities;
+    @OneToMany(mappedBy = "language")
+    private Set<WordEntity> words;
 
     public LanguageEntity() {
-        this.wordEntities = new HashSet<>();
+        this.words = new HashSet<>();
     }
 }
