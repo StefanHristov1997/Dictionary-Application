@@ -4,6 +4,7 @@ import com.dictionaryapp.model.dto.AddWordDTO;
 import com.dictionaryapp.model.entity.LanguageEntity;
 import com.dictionaryapp.model.entity.UserEntity;
 import com.dictionaryapp.model.entity.WordEntity;
+import com.dictionaryapp.model.enums.LanguageNamesEnum;
 import com.dictionaryapp.repository.LanguageRepository;
 import com.dictionaryapp.repository.UserRepository;
 import com.dictionaryapp.repository.WordRepository;
@@ -13,10 +14,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WordServiceImpl implements WordService {
 
-    private WordRepository wordRepository;
+    private final WordRepository wordRepository;
     private final LanguageRepository languageRepository;
     private final UserRepository userRepository;
 
@@ -44,5 +47,10 @@ public class WordServiceImpl implements WordService {
         wordToSave.setLanguage(language);
 
         wordRepository.save(wordToSave);
+    }
+
+    @Override
+    public List<WordEntity> findWordsByLanguageName(LanguageNamesEnum name) {
+        return this.wordRepository.findAllByLanguageName(name);
     }
 }
