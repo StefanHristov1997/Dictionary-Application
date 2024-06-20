@@ -41,6 +41,7 @@ public class WordServiceImpl implements WordService {
         WordEntity wordToSave = modelMapper.map(addWordDTO, WordEntity.class);
 
         UserEntity currentUser = userRepository.findById(currentUserSession.getId()).get();
+
         LanguageEntity language = languageRepository.findLanguageEntityByName(addWordDTO.getLanguage());
 
         wordToSave.setAddedBy(currentUser);
@@ -53,4 +54,15 @@ public class WordServiceImpl implements WordService {
     public List<WordEntity> findWordsByLanguageName(LanguageNamesEnum name) {
         return this.wordRepository.findAllByLanguageName(name);
     }
+
+    @Override
+    public void removeWord(Long id) {
+        this.wordRepository.deleteById(id);
+    }
+
+    @Override
+    public void removeAllWords() {
+        this.wordRepository.deleteAll();
+    }
+
 }

@@ -11,4 +11,9 @@ public interface WordService {
     void addWord(AddWordDTO addWordDTO);
 
     List<WordEntity> findWordsByLanguageName(LanguageNamesEnum name);
+
+    void removeWord(Long id);
+
+    void removeAllWords();
+
 }

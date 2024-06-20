@@ -11,4 +11,6 @@ import java.util.List;
 public interface WordRepository extends JpaRepository<WordEntity, Long> {
 
     List<WordEntity> findAllByLanguageName(LanguageNamesEnum name);
+
+
 }

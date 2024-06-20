@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/words")
 public class WordController {
 
     private WordService wordService;
@@ -31,7 +31,7 @@ public class WordController {
         this.currentUserSession = currentUserSession;
     }
 
-    @GetMapping("/word-add")
+    @GetMapping("/add-word")
     public String viewAddWord(Model model) {
 
         if(!currentUserSession.isLogged()){
@@ -45,7 +45,7 @@ public class WordController {
         return "word-add";
     }
 
-    @PostMapping("/word-add")
+    @PostMapping("/add-word")
     public String doAddWord(
             @Valid AddWordDTO addWordDTO,
             BindingResult bindingResult,
@@ -59,10 +59,34 @@ public class WordController {
         if(bindingResult.hasErrors()){
             rAtt.addFlashAttribute(attribute, addWordDTO);
             rAtt.addFlashAttribute(bindingResultPackage + "." + attribute, bindingResult);
-            return "redirect:/word-add";
+            return "redirect:/words/add-word";
         }
 
         wordService.addWord(addWordDTO);
+
+        return "redirect:/home";
+    }
+
+    @DeleteMapping("remove-word/{id}")
+    public String deleteWord(@PathVariable("id") Long id){
+
+        if(!currentUserSession.isLogged()){
+            return "redirect:/";
+        }
+
+        wordService.removeWord(id);
+
+        return "redirect:/home";
+    }
+
+    @DeleteMapping("/remove-all")
+    public String deleteAllWords(){
+
+        if(!currentUserSession.isLogged()){
+            return "redirect:/";
+        }
+
+        wordService.removeAllWords();
 
         return "redirect:/home";
     }
